@@ -1,0 +1,7 @@
+{
+
+	"Pyramid (POET)": { "Dest" : "http://graphite.sf.gid.gap.com", "offset" : "28800", "opsname" : "Poet" },
+	"Brand Websites": { "Dest" : "asdf", "offset" : "28800", "opsname" : "ecom"  }
+ 
+ }
+
