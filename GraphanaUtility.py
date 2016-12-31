@@ -57,33 +57,33 @@ class Graphana:
 		if affected_ci in self.SNowRef : 
 			return ( self.SNowRef[ affected_ci ]['Dest'], self.SNowRef[ affected_ci ]['offset'], self.SNowRef[ affected_ci ]['opsname'])  
 		else : 
-			return ( '', '', '')
+			return ( 'http://graphite.sf.gid.gap.com', 0, affected_ci)
 
 
 
 	def addEvent(self, event, number, description, ci, eventDate, eventType, approval, eventDest ) :
 
-		print ( eventDate )
-		utc_time = time.strptime( eventDate, "%Y-%m-%d %H:%M:%S")
-		epoch_time = timegm(utc_time)
-		print (epoch_time ) 
-		
-		
+
+
 		
 		refValues = self.getRefValues( ci )
 		
-		print( 'ref' + refValues[0]  )
-		print ( 'even' + eventDest )
+		if(self.debug >= 1) :
+			print( 'ref: %s, %s, %s' % refValues  )
+			print ( 'event: ' + eventDest )
 		
-		if refValues[1] == '' : epoch_time = epoch_time + refValues[1] 
-		if refValues[2] == '' : ci = refValues[2] 
 		
 		if refValues[0] != '' : eventDest = refValues[0] 
 		else : eventDest = self.baseurl
-				
-		epoch_time = epoch_time + 28800
 		
-		print( "eventDest" + eventDest )
+
+		utc_time = time.strptime( eventDate, "%Y-%m-%d %H:%M:%S")
+		epoch_time = timegm(utc_time) + 28800 + refValues[1] 
+
+		ci = refValues[2] 
+		
+
+		
 		
 		if(self.debug >= 1) :
 			print("adding %s event: '%s %s (%s) [%s] %s %s'" % (event, number, description[0:40], ci, epoch_time, eventType, approval ))

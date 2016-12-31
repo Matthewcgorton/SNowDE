@@ -136,6 +136,10 @@ def main(argv):
 		if(debug >= 1) : print("Get Changes that should have started ")
 		changes = s.getChangesStartingBetweenDates( '2016-10-05 14:52:39', '2016-10-06 14:59:39' )
 	
+	
+	print( len(changes) )
+	
+	exit()
 
 # step through changes
 	for index in range(len(changes)) :
